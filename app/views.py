@@ -1,10 +1,13 @@
 from flask import Flask
 
+
 app = Flask(__name__)
 
 
 html = """\
-<h1 style='margin:0; color:steelblue;'>Hello, world!</h1>
+<h1 style='margin:0; color:steelblue;'>
+    Hello, Flask!
+</h1>
 """
 
 
