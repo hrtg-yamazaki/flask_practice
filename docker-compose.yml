@@ -5,6 +5,8 @@ services:
         build: .
         command: >
             bash -c "
+                pip install -r requirements.txt &&
+                python3 config/settings.py &&
                 python3 app/views.py
             "
         working_dir: /code
