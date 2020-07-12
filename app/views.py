@@ -1,7 +1,9 @@
 from flask import Flask, render_template
+from config.settings import get_secret
 
 
 app = Flask(__name__)
+app.secret_key = get_secret()
 
 
 @app.route("/")

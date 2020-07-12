@@ -13,7 +13,7 @@ DB_PATH = os.path.join(APP_ROOT, "db/sample.sqlite")
 CONFIG_DIR = str(APP_ROOT) + "/config/"
 LOCAL_SETTINGS_PATH = os.path.join(CONFIG_DIR, "local_settings.py")
 
-os.chdir(APP_ROOT)
+os.chdir(PROJECT_ROOT)
 
 
 def set_db():
@@ -58,6 +58,21 @@ def set_secret():
         print("The file \"local_settings.py\" is released.")
     else:
         print("The file \"local_settings.py\" is already created.")
+
+
+def get_secret():
+    """
+    シークレットキーを取得
+    """
+    try:
+        from .local_settings import SECRET_KEY
+        secret_key = SECRET_KEY
+    except ModuleNotFoundError as e:
+        print(str(e))
+        print("SECRET KEY is not found.")
+        return None
+    else:
+        return secret_key
 
 
 def main():
