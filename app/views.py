@@ -1,19 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 
 
 app = Flask(__name__)
 
 
-html = """\
-<h1 style='margin:0; color:steelblue;'>
-    Hello, Flask!
-</h1>
-"""
-
-
 @app.route("/")
 def index():
-    return html
+    return render_template("layout.html")
 
 
 if __name__ == "__main__":
