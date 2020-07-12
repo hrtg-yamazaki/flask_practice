@@ -1,12 +1,16 @@
 import os
 from pathlib import Path
 import sqlite3
+import string
+import secrets
 
 
 PROJECT_ROOT = Path("__file__").resolve().parents[0]
 APP_ROOT = str(PROJECT_ROOT) + "/app/"
-DB_PATH = APP_ROOT + "db/sample.sqlite"
+DB_PATH = os.path.join(APP_ROOT, "db/sample.sqlite")
 
+CONFIG_DIR = str(PROJECT_ROOT) + "/config/"
+LOCAL_SETTINGS_PATH = os.path.join(CONFIG_DIR, "local_settings.py")
 
 os.chdir(PROJECT_ROOT)
 
@@ -36,9 +40,23 @@ def set_table():
         print("Error occured." + str(e))
         exit()
     else:
-        print("Table created.")
+        print("The database for this project is ready.")
     finally:
         conn.close()
+
+
+def set_secret():
+    """
+    local_settings.pyを作成して、自動でシークレットキーを生成する
+    """
+    if not os.path.exists(LOCAL_SETTINGS_PATH):
+        letters = string.ascii_letters + string.digits
+        secret_string = "".join(secrets.choice(letters) for letter in range(16))
+        with open(LOCAL_SETTINGS_PATH, "w", encoding="utf-8") as f:
+            f.write("SECRET_KEY = \"" + secret_string + "\"\n")
+        print("The file \"local_settings.py\" is released.")
+    else:
+        print("The file \"local_settings.py\" is already created.")
 
 
 def main():
@@ -47,6 +65,7 @@ def main():
     """
     set_db()
     set_table()
+    set_secret()
 
 
 if __name__ == "__main__":
