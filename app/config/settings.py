@@ -6,10 +6,12 @@ import secrets
 
 
 PROJECT_ROOT = Path("__file__").resolve().parents[0]
+
+print(PROJECT_ROOT)
 APP_ROOT = str(PROJECT_ROOT) + "/app/"
 DB_PATH = os.path.join(APP_ROOT, "db/sample.sqlite")
 
-CONFIG_DIR = str(PROJECT_ROOT) + "/config/"
+CONFIG_DIR = str(APP_ROOT) + "/config/"
 LOCAL_SETTINGS_PATH = os.path.join(CONFIG_DIR, "local_settings.py")
 
 os.chdir(PROJECT_ROOT)

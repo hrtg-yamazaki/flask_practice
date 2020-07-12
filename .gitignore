@@ -4,4 +4,4 @@ __pycache__/
 
 *.sqlite
 
-config/local_settings.py
+local_settings.py
